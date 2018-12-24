@@ -1,0 +1,4 @@
+Create an R file: csv_to_sql.r
+Open the csv file using R code and and loop through it printing each line with print.
+
+Connect to the db and import the csv lines by looping through them again and inserting them into the table we created.
