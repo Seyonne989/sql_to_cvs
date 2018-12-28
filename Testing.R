@@ -17,13 +17,21 @@ i <- 1
 # }
 
 
+# Example 
+# INSERT INTO `r_exp`.`import_csv` (`company_text`, `boss`, `ranking`, `popularity`, `bonus`, `sick_days`, `vacation`, `location`) 
+#VALUES ('gg', 'dd', '33', '7', '5', '6', '9', 'ENG');
+
 #res <- dbSendQuery(con, "INSERT INTO `r_exp`.`import_csv` (`company_text`, `boss`, `ranking`, `popularity`, `bonus`, `sick_days`,`vacation`, `location`,`department`,`weight`) 
 #VALUES ('EA', 'Jon', '999', '-1', '0', '1000','6','Isreal','paper','0.4');")
 sqlstr <- "INSERT INTO `r_exp`.`import_csv` (`company_text`, `boss`, `ranking`, `popularity`, `bonus`, `sick_days`,`vacation`, `location`,`department`,`weight`)"
 sqlstr <- paste(sqlstr, "VALUES", sep = " ")
-sqlstr <- paste(sqlstr,  Testing[i,2], sep = " '")
-sqlstr <- paste(sqlstr,  ",", sep = " '")
-sqlstr <- paste(sqlstr,  Testing[i,3], sep = " '")
-sqlstr <- paste(sqlstr,  ",", sep = " '")
-sqlstr <- paste(sqlstr,  Testing[i,4], sep = " '")
+for(j in 2:9) {
+   sqlstr <- paste(sqlstr,  Testing[i,j], sep = " '")
+   sqlstr <- paste(sqlstr,  ",", sep = "'")
+}
+sqlstr <- paste(sqlstr,  Testing[i,10], sep = " '")
+
+sqlstr <- paste(sqlstr,  "\');")
+
 print(sqlstr) 
+res <- dbSendQuery(con, sqlstr)
